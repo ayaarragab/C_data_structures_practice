@@ -1,0 +1,37 @@
+#ifndef LISTS_H
+#define LISTS_H
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+/**
+ * struct listint_s - singly linked list
+ * @n: integer
+ * @next: points to the next node
+ *
+ * Description: singly linked list node structure
+ * 
+ */
+typedef struct listint_s
+{
+    int n;
+    struct listint_s *next;
+}listint_t;
+size_t print_listint(listint_t *h);
+typedef struct dlistint_s
+{
+    int n;
+    struct dlistint_s *prev;
+    struct dlistint_s *next;
+} dlistint_t;
+size_t print_dlistint(dlistint_t *h);
+size_t dlistint_len(dlistint_t *h);
+dlistint_t *add_dnodeint(dlistint_t **head, const int n);
+dlistint_t *add_dnodeint_end(dlistint_t **head, const int n);
+void free_dlistint(dlistint_t *head);
+dlistint_t *get_dnodeint_at_index(dlistint_t *head, unsigned int index);
+dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n);
+int delete_dnodeint_at_index(dlistint_t **head, unsigned int index);
+int sum_dlistint(dlistint_t *head);
+int find_mid(dlistint_t **head);
+dlistint_t *Reverse_a_doubly_linked_list(dlistint_t **head);
+#endif
