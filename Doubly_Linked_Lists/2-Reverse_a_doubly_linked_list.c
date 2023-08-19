@@ -1,6 +1,6 @@
 #include "lists.h"
 /**
- * Reverse_a_doubly_linked_list - reverses a reversly linked list
+ * Reverse_a_doubly_linked_list - reverses a doubly linked list
  * @head: head
  * Return: reversed linkedlist
 */
