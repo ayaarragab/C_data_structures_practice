@@ -1,14 +1,11 @@
 #include "lists.h"
-
 /**
  * main - check the code
- *
  * Return: Always EXIT_SUCCESS.
  */
 int main(void)
 {
     dlistint_t *head;
-    int middle;
 
     head = NULL;
     add_dnodeint(&head, 0);
@@ -21,8 +18,9 @@ int main(void)
     add_dnodeint(&head, 1024);
     add_dnodeint(&head, 5000);
     print_dlistint(head);
-    middle = find_mid(&head);
-    printf("Middle value is %d\n", middle);
+    printf("After reversing:\n");
+    Reverse_a_doubly_linked_list(&head);
+    print_dlistint(head);
     free_dlistint(head);
     return (EXIT_SUCCESS);
 }
