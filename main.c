@@ -23,5 +23,6 @@ int main(void)
     print_dlistint(head);
     middle = find_mid(&head);
     printf("Middle value is %d\n", middle);
+    free_dlistint(head);
     return (EXIT_SUCCESS);
 }
