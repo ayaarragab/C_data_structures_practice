@@ -22,9 +22,11 @@ int main(int argc, char **argv)
 	push(&stack, 1987);
 	push(&stack, 43);
 	push(&stack, 23);
-	pall(&stack, 0);
-	stack->next = NULL;
-	pint(&stack, __LINE__);
+	printf("pall before add:\n");
+	pall(&stack, __LINE__);
+	add(&stack, __LINE__);
+	printf("\npall after swaddap:\n");
+	pall(&stack, __LINE__);
 	free_stack(stack);
 	return (0);
 }

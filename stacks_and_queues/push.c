@@ -1,7 +1,8 @@
 #include "lists.h"
 /**
  * push - implementation of monty push
- * @data: data to be pushed
+ * @stack: pointer to top of the stack
+ * @line_number: line_number
  * Return: nothing
 */
 void push(stack_t **stack, unsigned int line_number)
