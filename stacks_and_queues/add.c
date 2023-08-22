@@ -17,6 +17,7 @@ void add(stack_t **stack, unsigned int line_number)
 	}
 	add = (*stack)->n + (*stack)->next->n;
 	(*stack) = (*stack)->next;
+	free((*stack)->prev);
 	(*stack)->prev = NULL;
 	(*stack)->n = add;
 }

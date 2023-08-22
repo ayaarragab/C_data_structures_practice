@@ -34,13 +34,14 @@ void errno_fd(char *str, stack_t *stack)
 	free_stack(stack);
 	exit(EXIT_FAILURE);
 }
-instruction_t array_of_instructions[6] = {
+instruction_t array_of_instructions[7] = {
 	{"pop", pop},
 	{"pint", pint},
 	{"pall", pall},
 	{"push", push},
 	{"swap", swap},
-	{"nop", nop}
+	{"nop", nop},
+	{"add", add}
 };
 /**
  * make_array_of_strings - func
@@ -87,10 +88,9 @@ char **make_array_of_strings(char *command)
 int main(int argc, char **argv)
 {
 	stack_t *stack = malloc(sizeof(stack_t));
-	int i = 0;
-	size_t n = 0;
-	ssize_t n_characters;
-	char *buffer = NULL, **splitted_line, *filename;
+	int i;
+	char *trimmed;
+	char buffer[BUFSIZ], **splitted_line, *filename = argv[1];
 	FILE *monty_file;
 
 	check_malloc(stack);
@@ -100,15 +100,17 @@ int main(int argc, char **argv)
 	check_malloc2(buffer);
 	monty_file = fopen(argv[1], "r");
 	if (monty_file == NULL)
-		errno_fd(argv[1], stack);
-	while ((n_characters = getline(&buffer, &n, monty_file)) != -1)
+		errno_fd(filename, stack);
+	while (fgets(buffer, BUFSIZ, monty_file) != NULL)
 	{
-		splitted_line = make_array_of_strings(buffer);
-		if (i == 5)
-			error_instruction(stack, __LINE__, splitted_line[0], splitted_line);
-		while (i < 6)
+		if (buffer[0] == '\n' || !check_if_all_spaces(buffer))
+			continue;	
+		trimmed = trim(buffer);
+		splitted_line = make_array_of_strings(trimmed);
+		i = 0;
+		while (i < 7)
 		{
-			if (strcmp(splitted_line[0], array_of_instructions[i].opcode) == 0)
+			if (strcmp(strtok(splitted_line[0], "\n"), array_of_instructions[i].opcode) == 0)
 			{
 				array_of_instructions[i].f(&stack, __LINE__);
 				if (strcmp(splitted_line[0], "push") == 0)
@@ -120,10 +122,11 @@ int main(int argc, char **argv)
 			}
 			i++;
 		}
+		if (i == 7)
+			error_instruction(stack, __LINE__, splitted_line[0], splitted_line);
 	}
 	fclose(monty_file);
 	free_2d(splitted_line);
-	free(buffer);
 	free_stack(stack);
 	return (0);
 }

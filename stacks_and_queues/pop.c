@@ -7,7 +7,7 @@
 */
 void pop(stack_t **stack, unsigned int line_number)
 {
-	int num = (*stack)->n;
+	int num;
 
 	if (*stack == NULL)
 	{
@@ -15,6 +15,9 @@ void pop(stack_t **stack, unsigned int line_number)
 		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
+	num = (*stack)->n;
+	if ((*stack)->next == NULL)
+		return;
 	(*stack) = (*stack)->next;
 	(*stack)->prev = NULL;
 	printf("%d\n", num);
