@@ -24,6 +24,7 @@ int main(int argc, char **argv)
 	push(&stack, 23);
 	pall(&stack, 0);
 	stack->next = NULL;
+	pint(&stack, __LINE__);
 	free_stack(stack);
 	return (0);
 }
