@@ -25,8 +25,9 @@ int main(int argc, char **argv)
 	printf("pall before add:\n");
 	pall(&stack, __LINE__);
 	add(&stack, __LINE__);
-	printf("\npall after swaddap:\n");
+	printf("\npall after add:\n");
 	pall(&stack, __LINE__);
+	nop(&stack, 0);
 	free_stack(stack);
 	return (0);
 }
